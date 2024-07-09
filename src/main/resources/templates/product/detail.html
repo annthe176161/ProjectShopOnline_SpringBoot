@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="/css/product.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .container-main {
+            min-height: calc(100vh - 96px); /* 96px = header height */
+            padding-bottom: 100px; /* height of the footer */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<!-- Include the header -->
+<header th:replace="fragments/header :: header"></header>
+<!-- End Header -->
+
+<div class="container-main">
+    <div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <div th:if="${#lists.isEmpty(images)}">
+                    <img src="/path/to/default/image.jpg" class="w-full h-80 object-cover rounded-lg shadow-md" alt="Default Image">
+                </div>
+                <div th:if="${!#lists.isEmpty(images)}">
+                    <img th:src="@{${images[0].imageURL}}" class="w-full h-80 object-cover rounded-lg shadow-md" alt="Product Image">
+                </div>
+            </div>
+            <div>
+                <h1 class="text-4xl font-bold mb-4" th:text="${product.productName}">Product Name</h1>
+                <p class="text-gray-700 mb-6" th:text="${product.description}">Product Description</p>
+                <p class="text-2xl font-semibold mb-4"><strong>Price:</strong> $<span th:text="${product.price}">Price</span></p>
+                <p class="text-xl font-semibold mb-4"><strong>Stock:</strong> <span th:text="${product.stockQuantity}">Stock Quantity</span></p>
+                <div class="icon-buttons mt-6 flex space-x-4">
+                    <a th:href="@{/cart/add(productId=${product.id})}" class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300" title="Add to Cart">
+                        <i class="fas fa-cart-plus mr-2"></i> Add to Cart
+                    </a>
+                    <a th:href="@{/wishlist/add(productId=${product.id})}" class="bg-white text-blue-600 border border-blue-600 px-6 py-3 rounded-lg shadow-lg hover:bg-blue-600 hover:text-white transition duration-300" title="Add to Wishlist">
+                        <i class="fas fa-heart mr-2"></i> Add to Wishlist
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Reviews -->
+        <div class="mt-10">
+            <h2 class="text-3xl font-bold mb-4">Customer Reviews</h2>
+            <div th:each="review : ${reviews}">
+                <div class="bg-gray-100 p-4 rounded-lg mb-4 shadow-md">
+                    <p class="text-lg font-semibold" th:text="${review.userID.username}">Customer Name</p>
+                    <p class="text-gray-700" th:text="${review.comment}">Review Comment</p>
+                    <div class="text-yellow-500">
+                        <i class="fas fa-star" th:each="star, iterStat : ${#numbers.sequence(1, review.rating)}"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include the footer -->
+<footer th:replace="fragments/footer :: footer"></footer>
+<!-- End Footer -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.2/alpine.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.logo p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.search-bar form {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="search"] {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-bar button {
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-left: none;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    outline: none;
+}
+
+.search-bar button:hover {
+    background-color: #f1f1f1;
+}
+
+.user-actions a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    color: #333;
+}
+
+.user-actions a:hover {
+    background-color: #f1f1f1;
+}
+
+.user-actions i {
+    margin-right: 0.5rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #f1f1f1;
+}
+
+.btn i {
+    margin-right: 0.5rem;
+}

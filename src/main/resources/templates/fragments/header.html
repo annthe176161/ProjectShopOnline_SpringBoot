@@ -2,53 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Shop Online</title>
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <title>Shop Online - Header</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-<header class="bg-primary text-white text-center">
-    <style>
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        .logo h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        .logo p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-        .search-bar form {
-            display: flex;
-            align-items: center;
-        }
-        .user-actions a {
-            margin-left: 10px;
-        }
-    </style>
-    <div class="container">
-        <div class="header-container">
-            <div class="logo">
-                <h1>Shop Online</h1>
-                <p>Your one-stop shop for all your needs</p>
-            </div>
-            <div class="search-bar">
-                <form action="/search" method="get">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
-                    <button class="btn btn-light" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-            </div>
-            <div class="user-actions">
-                <a href="/login" class="btn btn-light"><i class="bi bi-box-arrow-in-right"></i> Login</a>
-                <a href="/logout" class="btn btn-light"><i class="bi bi-box-arrow-right"></i> Logout</a>
-                <a href="/profile" class="btn btn-light"><i class="bi bi-person"></i> Profile</a>
-                <a href="/cart" class="btn btn-light"><i class="bi bi-cart"></i> Cart</a>
-            </div>
+<header class="bg-blue-600 text-white py-4 shadow-md">
+    <div class="container mx-auto flex items-center justify-between">
+        <div>
+            <h1 class="text-3xl font-bold"><i class="fas fa-store mr-2"></i>Shop Online</h1>
+            <p class="text-lg">Your one-stop shop for all your needs</p>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a th:if="${!isLoggedIn}" href="/login" class="text-white hover:text-gray-300"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
+            <a th:if="${isLoggedIn}" href="/logout" class="text-white hover:text-gray-300"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
+            <a th:if="${isLoggedIn}" href="/profile" class="text-white hover:text-gray-300"><i class="fas fa-user mr-1"></i> Profile</a>
+            <a th:if="${isLoggedIn}" href="/cart" class="text-white hover:text-gray-300"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
         </div>
     </div>
 </header>

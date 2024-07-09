@@ -2,61 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Shop Online</title>
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <title>Shop Online - Navbar</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <style>
-        .navbar-brand h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        .navbar-nav .nav-item {
-            margin-left: 15px;
-        }
-    </style>
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <h1>Shop Online</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
+<nav class="bg-gray-100 shadow-md">
+    <div class="container mx-auto flex items-center justify-between py-4">
+        <div class="flex items-center">
+            <a class="navbar-brand text-2xl font-bold text-blue-600" href="/">
+                <i class="fas fa-store mr-2"></i>Shop Online
+            </a>
+        </div>
+        <div class="flex items-center">
+            <ul class="hidden md:flex space-x-6">
+                <li><a class="text-gray-700 hover:text-blue-600" href="/">Home</a></li>
+                <li><a class="text-gray-700 hover:text-blue-600" href="/products">Products</a></li>
+                <li><a class="text-gray-700 hover:text-blue-600" href="/about">About Us</a></li>
+                <li><a class="text-gray-700 hover:text-blue-600" href="/contact">Contact</a></li>
             </ul>
-            <form class="d-flex" action="/search" method="get">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
-                <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+            <form class="flex ml-6" action="/search" method="get">
+                <input class="form-input px-4 py-2 rounded-l-lg border border-gray-300" type="search" placeholder="Search" aria-label="Search" name="query">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-r-lg" type="submit"><i class="fas fa-search"></i></button>
             </form>
-            <ul class="navbar-nav ms-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile"><i class="bi bi-person"></i> Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart"><i class="bi bi-cart"></i> Cart</a>
-                </li>
-            </ul>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="/login" class="text-gray-700 hover:text-blue-600"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
+            <a href="/logout" class="text-gray-700 hover:text-blue-600"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
+            <a href="/profile" class="text-gray-700 hover:text-blue-600"><i class="fas fa-user mr-1"></i> Profile</a>
+            <a href="/cart" class="text-gray-700 hover:text-blue-600"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
         </div>
     </div>
 </nav>

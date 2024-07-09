@@ -2,47 +2,115 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage</title>
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <title>Shop Online - Home</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="/css/homepage.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+        .footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
-<body>
-<!-- Include header -->
-<th:block th:replace="fragments/header :: header"></th:block>
-<!-- Include navbar -->
-<th:block th:replace="fragments/navbar :: navbar"></th:block>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<!-- Include the header -->
+<header th:replace="fragments/header :: header"></header>
+<!-- End Header -->
 
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-3 categories">
-            <h1 class="mb-4">Categories</h1>
-            <ul class="list-group">
-                <li class="list-group-item" th:each="category : ${categories}">
-                    <a th:href="@{/home(categoryId=${category.id})}" th:text="${category.categoryName}" class="text-decoration-none text-dark">Category Name</a>
+<!-- Navbar -->
+<nav class="bg-gray-100 shadow-md">
+    <div class="container mx-auto flex items-center justify-between py-4">
+        <div class="flex items-center">
+            <a class="navbar-brand text-2xl font-bold text-blue-600" href="/home">
+                <i class="fas fa-home mr-2"></i>Home
+            </a>
+        </div>
+        <div class="flex items-center">
+            <ul class="hidden md:flex space-x-6">
+                <li><a class="text-gray-700 hover:text-blue-600" href="/">Home</a></li>
+                <li><a class="text-gray-700 hover:text-blue-600" href="/products">Products</a></li>
+                <li><a class="text-gray-700 hover:text-blue-600" href="/about">About Us</a></li>
+                <li><a class="text-gray-700 hover:text-blue-600" href="/contact">Contact</a></li>
+            </ul>
+            <form class="flex ml-6" action="/home" method="get">
+                <input class="form-input px-4 py-2 rounded-l-lg border border-gray-300" type="search" placeholder="Search" aria-label="Search" name="search" th:value="${search}">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-r-lg" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->
+
+<!-- Main Content -->
+<div class="container mx-auto my-10 content">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div class="lg:col-span-1 p-6 bg-white shadow rounded-lg categories">
+            <h2 class="text-2xl font-bold mb-4">Categories</h2>
+            <ul>
+                <li class="py-3 border-b" th:each="category : ${categories}">
+                    <a th:href="@{/home(categoryId=${category.id})}" th:text="${category.categoryName}" class="text-lg text-gray-800 hover:text-gray-900">Category Name</a>
                 </li>
             </ul>
         </div>
-        <div class="col-md-9 products">
-            <h2 th:if="${selectedCategory != null}" th:text="${selectedCategory.categoryName}" class="mt-5">Category Products</h2>
-            <div th:each="product : ${products}" class="product-card">
-                <h3 th:text="${product.productName}">Product Name</h3>
-                <p th:text="${product.description}">Description</p>
-                <p><strong>Price:</strong> <span th:text="${product.price}">Price</span></p>
-                <p><strong>Stock:</strong> <span th:text="${product.stockQuantity}">Stock Quantity</span></p>
-                <div class="icon-buttons">
-                    <a th:href="@{/product/detail(productId=${product.id})}" title="Detail"><i class="bi bi-eye"></i></a>
-                    <a th:href="@{/cart/add(productId=${product.id})}" title="Add to Cart"><i class="bi bi-cart-plus"></i></a>
-                    <a th:href="@{/wishlist/add(productId=${product.id})}" title="Yêu thích"><i class="bi bi-heart"></i></a>
+        <div class="lg:col-span-3 p-6 bg-white shadow rounded-lg">
+            <div class="products">
+                <h3 th:if="${selectedCategory != null}" th:text="${selectedCategory.categoryName}" class="text-2xl font-bold mb-6 mt-5">Category Products</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="product-item" th:each="product : ${productPage.getContent()}">
+                        <div class="card product-card bg-white shadow-lg rounded overflow-hidden" data-aos="fade-up">
+                            <img th:src="@{/images/${product.image}}" class="card-img-top w-full h-56 object-cover" alt="Product Image">
+                            <div class="card-body p-4 flex flex-col justify-between">
+                                <h5 class="card-title text-xl font-bold mb-2" th:text="${product.productName}">Product Name</h5>
+                                <p class="card-text text-gray-700 mb-4" th:text="${product.description}">Description</p>
+                                <p class="text-lg"><strong>Price:</strong> <span th:text="${product.price}">Price</span></p>
+                                <p class="text-lg"><strong>Stock:</strong> <span th:text="${product.stockQuantity}">Stock Quantity</span></p>
+                                <div class="icon-buttons flex justify-center space-x-6 mt-4">
+                                    <a th:href="@{/product/detail/{productId}(productId=${product.id})}" title="Detail" class="text-gray-600 hover:text-gray-800 text-2xl"><i class="fas fa-eye"></i></a>
+                                    <a th:href="@{/cart/add(productId=${product.id})}" title="Add to Cart" class="text-gray-600 hover:text-gray-800 text-2xl"><i class="fas fa-cart-plus"></i></a>
+                                    <a th:href="@{/wishlist/add(productId=${product.id})}" title="Yêu thích" class="text-gray-600 hover:text-gray-800 text-2xl"><i class="fas fa-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-6">
+                <ul class="flex items-center space-x-3">
+                    <li th:classappend="${productPage.hasPrevious()} ? '' : 'disabled'">
+                        <a th:href="@{/home(page=${productPage.number - 1}, categoryId=${selectedCategory != null ? selectedCategory.id : null}, search=${search})}" class="px-3 py-1 border rounded">Previous</a>
+                    </li>
+                    <li th:each="i : ${#numbers.sequence(0, productPage.totalPages - 1)}">
+                        <a th:href="@{/home(page=${i}, categoryId=${selectedCategory != null ? selectedCategory.id : null}, search=${search})}" th:text="${i + 1}" th:classappend="${i == productPage.number} ? 'font-bold' : ''" class="px-3 py-1 border rounded"></a>
+                    </li>
+                    <li th:classappend="${productPage.hasNext()} ? '' : 'disabled'">
+                        <a th:href="@{/home(page=${productPage.number + 1}, categoryId=${selectedCategory != null ? selectedCategory.id : null}, search=${search})}" class="px-3 py-1 border rounded">Next</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+<!-- End Main Content -->
 
-<!-- Include footer -->
-<th:block th:replace="fragments/footer :: footer"></th:block>
+<!-- Include the footer -->
+<footer th:replace="fragments/footer :: footer" class="footer"></footer>
+<!-- End Footer -->
 
-<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>
