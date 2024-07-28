@@ -1,38 +1,62 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Online - Navbar</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-<nav class="bg-gray-100 shadow-md">
-    <div class="container mx-auto flex items-center justify-between py-4">
-        <div class="flex items-center">
-            <a class="navbar-brand text-2xl font-bold text-blue-600" href="/">
-                <i class="fas fa-store mr-2"></i>Shop Online
-            </a>
+<body class="bg-gray-50">
+<header x-data="{ isOpen: false }" class="bg-white shadow-lg">
+    <nav class="container mx-auto px-6 py-3">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <a class="flex items-center text-2xl font-bold text-blue-600 hover:text-blue-700 transition duration-300" href="/">
+                    <i class="fas fa-store mr-2 animate__animated animate__bounceIn"></i>
+                    <span class="animate__animated animate__fadeIn">Shop Online</span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a class="text-gray-700 hover:text-blue-600 transition duration-300" href="/">Home</a>
+                <a class="text-gray-700 hover:text-blue-600 transition duration-300" href="/products">Products</a>
+                <a class="text-gray-700 hover:text-blue-600 transition duration-300" href="/about">About Us</a>
+                <a class="text-gray-700 hover:text-blue-600 transition duration-300" href="/contact">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <form class="hidden md:flex" action="/search" method="get">
+                    <input class="form-input px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="search" placeholder="Search" aria-label="Search" name="query">
+                    <button class="bg-blue-600 text-white px-6 py-2 rounded-r-full hover:bg-blue-700 transition duration-300" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/login" class="text-gray-700 hover:text-blue-600 transition duration-300"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
+                    <a href="/cart" class="relative text-gray-700 hover:text-blue-600 transition duration-300">
+                        <i class="fas fa-shopping-cart mr-1"></i> Cart
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center animate__animated animate__heartBeat animate__infinite">3</span>
+                    </a>
+                </div>
+                <button @click="isOpen = !isOpen" class="md:hidden text-gray-700 hover:text-blue-600 focus:outline-none">
+                    <i x-show="!isOpen" class="fas fa-bars text-2xl"></i>
+                    <i x-show="isOpen" class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
         </div>
-        <div class="flex items-center">
-            <ul class="hidden md:flex space-x-6">
-                <li><a class="text-gray-700 hover:text-blue-600" href="/">Home</a></li>
-                <li><a class="text-gray-700 hover:text-blue-600" href="/products">Products</a></li>
-                <li><a class="text-gray-700 hover:text-blue-600" href="/about">About Us</a></li>
-                <li><a class="text-gray-700 hover:text-blue-600" href="/contact">Contact</a></li>
-            </ul>
-            <form class="flex ml-6" action="/search" method="get">
-                <input class="form-input px-4 py-2 rounded-l-lg border border-gray-300" type="search" placeholder="Search" aria-label="Search" name="query">
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-r-lg" type="submit"><i class="fas fa-search"></i></button>
+        <div x-show="isOpen" class="md:hidden mt-4 animate__animated animate__fadeIn">
+            <a class="block py-2 text-gray-700 hover:text-blue-600 transition duration-300" href="/">Home</a>
+            <a class="block py-2 text-gray-700 hover:text-blue-600 transition duration-300" href="/products">Products</a>
+            <a class="block py-2 text-gray-700 hover:text-blue-600 transition duration-300" href="/about">About Us</a>
+            <a class="block py-2 text-gray-700 hover:text-blue-600 transition duration-300" href="/contact">Contact</a>
+            <form class="mt-4" action="/search" method="get">
+                <input class="form-input w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" type="search" placeholder="Search" aria-label="Search" name="query">
             </form>
+            <div class="mt-4 space-y-2">
+                <a href="/login" class="block text-gray-700 hover:text-blue-600 transition duration-300"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
+                <a href="/cart" class="block text-gray-700 hover:text-blue-600 transition duration-300"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+            </div>
         </div>
-        <div class="flex items-center space-x-4">
-            <a href="/login" class="text-gray-700 hover:text-blue-600"><i class="fas fa-sign-in-alt mr-1"></i> Login</a>
-            <a href="/logout" class="text-gray-700 hover:text-blue-600"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
-            <a href="/profile" class="text-gray-700 hover:text-blue-600"><i class="fas fa-user mr-1"></i> Profile</a>
-            <a href="/cart" class="text-gray-700 hover:text-blue-600"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
-        </div>
-    </div>
-</nav>
+    </nav>
+</header>
 </body>
 </html>

@@ -59,4 +59,19 @@ public class HomeController {
         model.addAttribute("search", search);
         return "homepage/homepage";
     }
+
+    @GetMapping("/header")
+    public String header(Model model) {
+        return "fragments/header";
+    }
+
+    @GetMapping("/footer")
+    public String footer(Model model) {
+        return "fragments/footer";
+    }
+
+    @GetMapping("/navbar")
+    public String navbar(Model model) {
+        return "fragments/navbar";
+    }
 }

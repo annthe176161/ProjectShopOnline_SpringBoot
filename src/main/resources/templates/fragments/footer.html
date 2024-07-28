@@ -1,21 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shop Online - Footer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .footer-link {
+            position: relative;
+            overflow: hidden;
+        }
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #60A5FA;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease-in-out;
+        }
+        .footer-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    </style>
 </head>
 <body>
-<footer class="bg-gray-900 text-white text-center py-6 w-full">
-    <div class="container mx-auto">
-        <p>&copy; 2024 Shop Online. All rights reserved.</p>
-        <div class="footer-links flex justify-center space-x-6">
-            <a href="/privacy" class="hover:underline"><i class="fas fa-user-secret mr-2"></i>Privacy Policy</a>
-            <a href="/terms" class="hover:underline"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a>
-            <a href="/contact" class="hover:underline"><i class="fas fa-envelope mr-2"></i>Contact Us</a>
+<footer class="bg-gradient-to-r from-gray-900 to-blue-900 text-white py-12" data-aos="fade-up">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center md:text-left">
+                <h3 class="text-2xl font-semibold mb-4">Shop Online</h3>
+                <p class="text-gray-300">&copy; 2024 All rights reserved.</p>
+            </div>
+            <div class="text-center">
+                <h4 class="text-xl font-semibold mb-4">Quick Links</h4>
+                <div class="flex flex-col space-y-2">
+                    <a href="/privacy" class="footer-link inline-flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition duration-300">
+                        <i class="fas fa-user-secret mr-2"></i>Privacy Policy
+                    </a>
+                    <a href="/terms" class="footer-link inline-flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition duration-300">
+                        <i class="fas fa-file-contract mr-2"></i>Terms of Service
+                    </a>
+                    <a href="/contact" class="footer-link inline-flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition duration-300">
+                        <i class="fas fa-envelope mr-2"></i>Contact Us
+                    </a>
+                </div>
+            </div>
+            <div class="text-center md:text-right">
+                <h4 class="text-xl font-semibold mb-4">Follow Us</h4>
+                <div class="flex justify-center md:justify-end space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white transition duration-300 transform hover:scale-110">
+                        <i class="fab fa-linkedin-in text-2xl"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </footer>
+<script>
+    AOS.init({
+        duration: 1000,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
+    });
+</script>
 </body>
 </html>
